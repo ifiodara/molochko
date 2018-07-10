@@ -1,0 +1,2 @@
+# molochko
+Milk prices combiner
