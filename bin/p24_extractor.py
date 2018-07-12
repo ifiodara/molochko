@@ -2,8 +2,16 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 from datetime import datetime
+import logging
+import os.path
 
+script_name = os.path.basename(__file__)
 base_url = 'http://p24.by'
+log_file = '/home/ilya/dev/projects/molochko/log/{0}.log'.format(script_name)
+output_file_path = '/home/ilya/dev/projects/molochko/data/p24'
+linkbase = base_url+'/goods/filter/?category_vid=2&category_cats=11&category_podcat=79'
+logging.basicConfig(filename=log_file,format='%(asctime)s : %(levelname)s\t: %(message)s',level=logging.DEBUG)
+start_time = datetime.now()
 
 
 def drug_data(quote_page):
@@ -31,24 +39,37 @@ def drug_data(quote_page):
         resArr.append([name, price, price_old, price_old_currency, base_url+name_link])
     return resArr,changer
 
-linkbase = base_url+'/goods/filter/?category_vid=2&category_cats=11&category_podcat=79'
-changer = 0
-result = []
-i = 1
-while True:
-    url = linkbase+'&CatalogProducts_page='+str(i)
-    temp_res = []
-    temp_res, changer = drug_data(url)
-    result.append(temp_res)
-    i+=1
-    if changer==1:
-        break
-    else:
-        continue
+def retrieve_data_for_urls():
+    logging.info('Retrieving data from {0}'.format(base_url))
+    changer = 0
+    result = []
+    i = 1
+    while True:
+        url = linkbase+'&CatalogProducts_page='+str(i)
+        temp_res = []
+        temp_res, changer = drug_data(url)
+        logging.info('{0} objects recieved'.format(len(temp_res)))
+        result.append(temp_res)
+        i+=1
+        if changer==1:
+            logging.info('Last page just parsed')
+            break
+        else:
+            continue
+    return result
 
-with open('/home/ilya/dev/projects/molochko/data/p24_{0}.csv'.format(str(datetime.now().strftime('%Y%m%d_%H%M%S'))),'w') as csv_file:
-    writer = csv.writer(csv_file, delimiter='±',quoting=csv.QUOTE_NONE, escapechar='\\')
-    for lines in result:
-        for line in lines:
-            writer.writerow(line)
+def write_file_output():
+    result = retrieve_data_for_urls()
+    with open('{0}_{1}.csv'.format(output_file_path,str(datetime.now().strftime('%Y%m%d_%H%M%S'))),'w') as csv_file:
+        writer = csv.writer(csv_file, delimiter='±',quoting=csv.QUOTE_NONE, escapechar='\\')
+        lines_number = 0
+        for lines in result:
+            for line in lines:
+                writer.writerow(line)
+                lines_number+=1
+        logging.info('{0} lines has been written'.format(lines_number))
 
+logging.info('Script {0} started'.format(os.path.basename(__file__)))
+write_file_output()
+end_time = datetime.now()
+logging.info('Script {0} finished successfully in {1}'.format(script_name, end_time-start_time))
