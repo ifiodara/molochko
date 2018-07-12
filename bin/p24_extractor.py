@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import csv
 from datetime import datetime
 
+base_url = 'http://p24.by'
 
 
 def drug_data(quote_page):
@@ -27,10 +28,10 @@ def drug_data(quote_page):
         name_elem = product_column.find('h2',class_='title-product').find('a')
         name = name_elem.text
         name_link = name_elem.get('href')
-        resArr.append([name, price, price_old, price_old_currency, name_link])
+        resArr.append([name, price, price_old, price_old_currency, base_url+name_link])
     return resArr,changer
 
-linkbase = 'http://p24.by/goods/filter/?category_vid=2&category_cats=11&category_podcat=79'
+linkbase = base_url+'/goods/filter/?category_vid=2&category_cats=11&category_podcat=79'
 changer = 0
 result = []
 i = 1
