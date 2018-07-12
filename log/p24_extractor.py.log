@@ -1,14 +1,14 @@
-2018-07-12 16:26:26,268 : INFO	: Script p24_extractor.py started
-2018-07-12 16:26:26,268 : INFO	: Retrieving data from http://p24.by
-2018-07-12 16:26:26,270 : DEBUG	: Starting new HTTP connection (1): p24.by:80
-2018-07-12 16:26:26,729 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=11&category_podcat=79&CatalogProducts_page=1 HTTP/1.1" 200 None
-2018-07-12 16:26:26,852 : INFO	: 40 objects recieved
-2018-07-12 16:26:26,853 : DEBUG	: Starting new HTTP connection (1): p24.by:80
-2018-07-12 16:26:27,269 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=11&category_podcat=79&CatalogProducts_page=2 HTTP/1.1" 200 None
-2018-07-12 16:26:27,391 : INFO	: 40 objects recieved
-2018-07-12 16:26:27,393 : DEBUG	: Starting new HTTP connection (1): p24.by:80
-2018-07-12 16:26:27,717 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=11&category_podcat=79&CatalogProducts_page=3 HTTP/1.1" 200 None
-2018-07-12 16:26:27,787 : INFO	: 18 objects recieved
-2018-07-12 16:26:27,788 : INFO	: Last page just parsed
-2018-07-12 16:26:27,788 : INFO	: 98 lines has been written
-2018-07-12 16:26:27,788 : INFO	: Script p24_extractor.py finished successfully in 0:00:01.519988
+2018-07-12 17:16:27,717 : INFO	: Script p24_extractor.py started
+2018-07-12 17:16:27,717 : INFO	: Retrieving data from http://p24.by
+2018-07-12 17:16:27,719 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-12 17:16:28,149 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=11&category_podcat=79&CatalogProducts_page=1 HTTP/1.1" 200 None
+2018-07-12 17:16:28,275 : INFO	: 40 objects recieved
+2018-07-12 17:16:28,277 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-12 17:16:28,707 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=11&category_podcat=79&CatalogProducts_page=2 HTTP/1.1" 200 None
+2018-07-12 17:16:28,829 : INFO	: 40 objects recieved
+2018-07-12 17:16:28,830 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-12 17:16:29,532 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=11&category_podcat=79&CatalogProducts_page=3 HTTP/1.1" 200 None
+2018-07-12 17:16:29,591 : INFO	: 16 objects recieved
+2018-07-12 17:16:29,591 : INFO	: Last page just parsed
+2018-07-12 17:16:29,592 : INFO	: 96 lines has been written
+2018-07-12 17:16:29,592 : INFO	: Script p24_extractor.py finished successfully in 0:00:01.875597

@@ -1,18 +1,25 @@
 import requests
-from bs4 import BeautifulSoup
 import csv
-from datetime import datetime
 import logging
 import os.path
+from bs4 import BeautifulSoup
+from datetime import datetime
+import configparser
+import sys
 
+################## PARAMETERS AND VARIABLES SECTION ###########################
+#config_file = '/home/ilya/dev/projects/molochko/src/p24_extractor.cfg'
+config_file = sys.argv[1]
+config = configparser.ConfigParser()
+config.read(config_file)
 script_name = os.path.basename(__file__)
-base_url = 'http://p24.by'
-log_file = '/home/ilya/dev/projects/molochko/log/{0}.log'.format(script_name)
-output_file_path = '/home/ilya/dev/projects/molochko/data/p24'
-linkbase = base_url+'/goods/filter/?category_vid=2&category_cats=11&category_podcat=79'
+base_url = config['p24.by']['base_url']
+log_file = '{0}{1}.log'.format(config['p24.by']['log_file_path'],script_name)
+output_file_path = config['p24.by']['output_file_path']
+linkbase = base_url + config['p24.by']['base_url_suffix']
 logging.basicConfig(filename=log_file,format='%(asctime)s : %(levelname)s\t: %(message)s',level=logging.DEBUG)
 start_time = datetime.now()
-
+###############################################################################
 
 def drug_data(quote_page):
     page = requests.get(quote_page)
