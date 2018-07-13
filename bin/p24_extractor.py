@@ -16,7 +16,7 @@ script_name = os.path.basename(__file__)
 base_url = config['p24.by']['base_url']
 log_file = '{0}{1}.log'.format(config['p24.by']['log_file_path'],script_name)
 output_file_path = config['p24.by']['output_file_path']
-linkbase = base_url + config['p24.by']['base_url_suffix']
+link_base = base_url + config['p24.by']['base_url_suffix']
 logging.basicConfig(filename=log_file,format='%(asctime)s : %(levelname)s\t: %(message)s',level=logging.DEBUG)
 start_time = datetime.now()
 ###############################################################################
@@ -52,7 +52,7 @@ def retrieve_data_for_urls():
     result = []
     i = 1
     while True:
-        url = linkbase+'&CatalogProducts_page='+str(i)
+        url = link_base+'&CatalogProducts_page='+str(i)
         temp_res = []
         temp_res, changer = drug_data(url)
         logging.info('{0} objects recieved'.format(len(temp_res)))
