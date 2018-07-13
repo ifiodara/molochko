@@ -24,25 +24,43 @@ start_time = datetime.now()
 def drug_data(quote_page):
     page = requests.get(quote_page)
     soup = BeautifulSoup(page.text,'html.parser')
-    if (soup.find('div',class_='navigation top').find('ul',id='yw0',class_='pagination').find_all('li')[4].has_attr('class')) and (soup.find('div',class_='navigation top').find('ul',id='yw0',class_='pagination').find_all('li',class_='disabled') is not None):
+    try:
+        if (soup.find('div',class_='navigation top').find('ul',id='yw0',class_='pagination').find_all('li')[4].has_attr('class')) and (soup.find('div',class_='navigation top').find('ul',id='yw0',class_='pagination').find_all('li',class_='disabled') is not None):
+            changer = 1
+        else:
+            changer = 0
+    except AttributeError:
         changer = 1
-    else:
-        changer = 0
-    product_columns = soup.find(class_='row items').find_all('div',class_='card-product-column')
+    try:
+        product_columns = soup.find(class_='row items').find_all('div',class_='card-product-column')
+    except AttributeError:
+        logging.warning('No products found')
     resArr = []
     for product_column in product_columns:
-        price = product_column.find('span',class_='price').find('span',class_='value red').text
+        try:
+            price = product_column.find('span',class_='price').find('span',class_='value red').text
+        except AttributeError:
+            price = ''
         try:
             price_old = product_column.find('span',class_='price-old').find('span',class_='value').text
         except AttributeError:
             price_old = ''
         try:
             price_old_currency = product_column.find('span',class_='price-old').find('span',class_='currency').text
-        except:
+        except AttributeError:
             price_old_currency = ''
-        name_elem = product_column.find('h2',class_='title-product').find('a')
-        name = name_elem.text
-        name_link = name_elem.get('href')
+        try:
+            name_elem = product_column.find('h2',class_='title-product').find('a')
+        except AttributeError:
+            name_elem = ''
+        try:
+            name = name_elem.text
+        except AttributeError:
+            name = ''
+        try:
+            name_link = name_elem.get('href')
+        except AttributeError:
+            name_link = ''        
         resArr.append([name, price, price_old, price_old_currency, base_url+name_link])
     return resArr,changer
 
