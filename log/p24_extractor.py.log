@@ -12,3 +12,67 @@
 2018-07-13 15:59:06,327 : INFO	: Last page just parsed
 2018-07-13 15:59:06,328 : INFO	: 107 lines has been written
 2018-07-13 15:59:06,328 : INFO	: Script p24_extractor.py finished successfully in 0:00:01.572763
+2018-07-13 16:04:57,474 : INFO	: Script p24_extractor.py started
+2018-07-13 16:04:57,474 : INFO	: Retrieving data from http://p24.by
+2018-07-13 16:04:57,475 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:04:57,900 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=12&CatalogProducts_page=1 HTTP/1.1" 200 None
+2018-07-13 16:04:58,024 : INFO	: 40 objects recieved
+2018-07-13 16:04:58,025 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:04:58,438 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=12&CatalogProducts_page=2 HTTP/1.1" 200 None
+2018-07-13 16:04:58,563 : INFO	: 40 objects recieved
+2018-07-13 16:04:58,565 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:04:58,987 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=12&CatalogProducts_page=3 HTTP/1.1" 200 None
+2018-07-13 16:04:59,126 : INFO	: 40 objects recieved
+2018-07-13 16:04:59,128 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:04:59,455 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=12&CatalogProducts_page=4 HTTP/1.1" 200 None
+2018-07-13 16:04:59,529 : INFO	: 20 objects recieved
+2018-07-13 16:04:59,529 : INFO	: Last page just parsed
+2018-07-13 16:04:59,530 : INFO	: 140 lines has been written
+2018-07-13 16:04:59,530 : INFO	: Script p24_extractor.py finished successfully in 0:00:02.056258
+2018-07-13 16:05:48,704 : INFO	: Script p24_extractor.py started
+2018-07-13 16:05:48,704 : INFO	: Retrieving data from http://p24.by
+2018-07-13 16:05:48,706 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:05:49,429 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=9&CatalogProducts_page=1 HTTP/1.1" 200 None
+2018-07-13 16:05:49,550 : INFO	: 40 objects recieved
+2018-07-13 16:05:49,551 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:05:50,117 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=9&CatalogProducts_page=2 HTTP/1.1" 200 None
+2018-07-13 16:05:50,239 : INFO	: 40 objects recieved
+2018-07-13 16:05:50,241 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:05:50,798 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=9&CatalogProducts_page=3 HTTP/1.1" 200 None
+2018-07-13 16:05:50,925 : INFO	: 40 objects recieved
+2018-07-13 16:05:50,927 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:05:51,566 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=9&CatalogProducts_page=4 HTTP/1.1" 200 None
+2018-07-13 16:05:51,709 : INFO	: 40 objects recieved
+2018-07-13 16:05:51,710 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:05:52,260 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=9&CatalogProducts_page=5 HTTP/1.1" 200 None
+2018-07-13 16:05:52,383 : INFO	: 40 objects recieved
+2018-07-13 16:05:52,384 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:05:52,946 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=9&CatalogProducts_page=6 HTTP/1.1" 200 None
+2018-07-13 16:05:53,070 : INFO	: 40 objects recieved
+2018-07-13 16:05:53,071 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:05:53,639 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=9&CatalogProducts_page=7 HTTP/1.1" 200 None
+2018-07-13 16:05:53,767 : INFO	: 40 objects recieved
+2018-07-13 16:05:53,768 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:05:54,371 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=9&CatalogProducts_page=8 HTTP/1.1" 200 None
+2018-07-13 16:05:54,495 : INFO	: 40 objects recieved
+2018-07-13 16:05:54,496 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:05:55,072 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=9&CatalogProducts_page=9 HTTP/1.1" 200 None
+2018-07-13 16:05:55,197 : INFO	: 40 objects recieved
+2018-07-13 16:05:55,199 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:05:55,770 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=9&CatalogProducts_page=10 HTTP/1.1" 200 None
+2018-07-13 16:05:55,894 : INFO	: 40 objects recieved
+2018-07-13 16:05:55,895 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:05:56,470 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=9&CatalogProducts_page=11 HTTP/1.1" 200 None
+2018-07-13 16:05:56,598 : INFO	: 40 objects recieved
+2018-07-13 16:05:56,599 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:05:57,211 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=9&CatalogProducts_page=12 HTTP/1.1" 200 None
+2018-07-13 16:05:57,374 : INFO	: 40 objects recieved
+2018-07-13 16:05:57,376 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:05:57,943 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=9&CatalogProducts_page=13 HTTP/1.1" 200 None
+2018-07-13 16:05:58,067 : INFO	: 40 objects recieved
+2018-07-13 16:05:58,069 : DEBUG	: Starting new HTTP connection (1): p24.by:80
+2018-07-13 16:05:58,635 : DEBUG	: http://p24.by:80 "GET /goods/filter/?category_vid=2&category_cats=9&CatalogProducts_page=14 HTTP/1.1" 200 None
+2018-07-13 16:05:58,761 : INFO	: 40 objects recieved
+2018-07-13 16:05:58,761 : INFO	: Last page just parsed
+2018-07-13 16:05:58,764 : INFO	: 560 lines has been written
+2018-07-13 16:05:58,764 : INFO	: Script p24_extractor.py finished successfully in 0:00:10.059915
