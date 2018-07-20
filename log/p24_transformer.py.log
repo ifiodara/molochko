@@ -1,0 +1,75 @@
+2018-07-20 15:30:41,926 : ERROR	: Can't connect to DB
+2018-07-20 15:30:41,926 : ERROR	: FATAL:  database "dev_wrk" does not exist
+
+2018-07-20 15:31:21,618 : ERROR	: Can't connect to DB
+2018-07-20 15:31:21,618 : ERROR	: FATAL:  database "dev_wrk" does not exist
+
+2018-07-20 15:32:25,611 : ERROR	: Can't connect to DB
+2018-07-20 15:32:25,611 : ERROR	: FATAL:  database "dev_wrk" does not exist
+
+2018-07-20 15:33:00,357 : ERROR	: Can't connect to DB
+2018-07-20 15:33:00,357 : ERROR	: FATAL:  database "dev_wrk" does not exist
+
+2018-07-20 15:33:09,349 : ERROR	: Can't connect to DB
+2018-07-20 15:33:09,349 : ERROR	: FATAL:  database "dev_wrk" does not exist
+
+2018-07-20 15:34:06,652 : ERROR	: Can't connect to DB
+2018-07-20 15:34:06,652 : ERROR	: FATAL:  database "dev_wrk" does not exist
+
+2018-07-20 15:34:46,757 : ERROR	: Can't connect to DB
+2018-07-20 15:34:46,757 : ERROR	: FATAL:  database "dev_wrk" does not exist
+
+2018-07-20 15:35:07,474 : ERROR	: Can't connect to DB
+2018-07-20 15:35:07,474 : ERROR	: FATAL:  database "dev_wrk" does not exist
+
+2018-07-20 15:35:16,286 : ERROR	: Can't connect to DB
+2018-07-20 15:35:16,286 : ERROR	: FATAL:  database "dev_wrk" does not exist
+
+2018-07-20 15:37:42,052 : ERROR	: Can't connect to DB
+2018-07-20 15:37:42,053 : ERROR	: FATAL:  database "dev_wrk" does not exist
+
+2018-07-20 15:40:30,826 : ERROR	: Can't connect to DB
+2018-07-20 15:40:30,826 : ERROR	: name 'log' is not defined
+2018-07-20 15:40:48,085 : INFO	: Connected to DB
+2018-07-20 15:47:05,754 : INFO	: Connected to DB
+2018-07-20 15:47:35,048 : INFO	: Connected to DB
+2018-07-20 15:48:20,888 : INFO	: Connected to DB
+2018-07-20 15:48:53,447 : INFO	: Connected to DB
+2018-07-20 15:49:30,078 : INFO	: Connected to DB
+2018-07-20 16:17:40,342 : INFO	: Connected to DB
+2018-07-20 16:18:43,203 : INFO	: Connected to DB
+2018-07-20 16:18:43,205 : INFO	: Inserted 1 rows
+2018-07-20 17:49:45,470 : INFO	: Connected to DB
+2018-07-20 17:49:45,471 : ERROR	: Can't get manufactures list from DB
+2018-07-20 17:49:45,471 : ERROR	: relation "dev_supply.s1_p24_milk_d" does not exist
+LINE 1:  select * from "dev_supply"."s1_p24_milk_d" where extract_ca...
+                       ^
+
+2018-07-20 17:50:01,646 : INFO	: Connected to DB
+2018-07-20 17:50:01,647 : ERROR	: Can't get manufactures list from DB
+2018-07-20 17:50:01,647 : ERROR	: relation "dev_supply.s1_p24_milk_d" does not exist
+LINE 1:  select * from "dev_supply"."s1_p24_milk_d" where extract_ca...
+                       ^
+
+2018-07-20 17:50:28,364 : INFO	: Connected to DB
+2018-07-20 17:50:28,382 : INFO	: Got 15 manufactures
+2018-07-20 17:51:58,233 : INFO	: Connected to DB
+2018-07-20 17:51:58,243 : INFO	: Got 15 manufactures
+2018-07-20 17:52:30,754 : INFO	: Connected to DB
+2018-07-20 17:52:30,756 : INFO	: Got 15 manufactures
+2018-07-20 17:54:48,600 : INFO	: Connected to DB
+2018-07-20 17:54:48,602 : INFO	: Got 15 manufactures
+2018-07-20 18:01:43,358 : INFO	: Connected to DB
+2018-07-20 18:01:43,360 : INFO	: Got 15 manufactures
+2018-07-20 18:02:33,002 : INFO	: Connected to DB
+2018-07-20 18:02:33,004 : INFO	: Got 15 manufactures
+2018-07-20 18:02:46,414 : INFO	: Connected to DB
+2018-07-20 18:02:46,415 : INFO	: Got 15 manufactures
+2018-07-20 18:03:36,088 : INFO	: Connected to DB
+2018-07-20 18:03:36,091 : INFO	: Got 15 manufactures
+2018-07-20 18:04:16,234 : INFO	: Connected to DB
+2018-07-20 18:04:16,236 : INFO	: Got 15 manufactures
+2018-07-20 18:04:33,519 : INFO	: Connected to DB
+2018-07-20 18:04:33,521 : INFO	: Got 15 manufactures
+2018-07-20 18:04:48,592 : INFO	: Connected to DB
+2018-07-20 18:04:48,595 : INFO	: Got 15 manufactures
