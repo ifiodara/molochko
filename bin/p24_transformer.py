@@ -7,6 +7,8 @@ from datetime import datetime
 import os
 import csv
 import glob
+from statistics import mean
+import re
 
 ################## PARAMETERS AND VARIABLES SECTION ###########################
 #config_file = '/home/ilya/dev/projects/molochko/src/p24_transformer.cfg'
@@ -26,6 +28,7 @@ manufactures_table =config['dbconf']['manufactures_table']
 supply_schema = config['dbconf']['supply_schema']
 extract_category = 'молоко'
 connect_str = "dbname='{0}' user='{1}' host='{2}' password='{3}'".format(dbname,user,host,password)
+re.UNICODE
 logging.basicConfig(filename=log_file,format='%(asctime)s : %(levelname)s\t: %(message)s',level=logging.DEBUG)
 start_time = datetime.now()
 ###############################################################################
@@ -96,16 +99,51 @@ for input_file in input_files:
             raw_price = line[1].strip()
             # TO DO if empty then calculate
             std_price = line[2].strip()
-            # if (std_price is None) or (std_price) :
+            # if (std_price is None) or (std_price.strip() == ''):
             #     print("\n\n\nWATTT\n\n\n")
-            # default_size = 
-            # fat_content =
-            
-            # manufacture = 
-            
-            print(str(category)+'|'+raw_price+'|'+std_price)
+
+            separated_description = raw_category.split(' ')
+
+            default_size = None
+            i=0
+            for part in separated_description:
+                print(str(i)+part)
+                i+=1
+                if (re.match(part,(r"\d+кг|\d+л")) is not None):
+                    default_size = re.sub(r"\D",'',part)
+                    print('1')
+                    break
+                elif (re.match(part,((r"\d+г|\d+мл"))) is not None):
+                    default_size = float(re.sub(r"\D",'',part))/1000
+                    break
+                elif (re.match(part,((r"\d+мг"))) is not None):
+                    default_size = float(re.sub(r"\D",'',part))/1000000
+                    break
+                else:
+                    default_size = None
+                
+
+            fat_content = None
+            for part in separated_description:
+                if (part.find('%')>-1):
+                    if part[:-1].find('-'):
+                        part_splitted = list(map(int,part[:-1].split('-')))
+                        fat_content = mean(part_splitted)
+                    else: 
+                        fat_content = part[:-1]
+                    break
+                else:
+                    fat_content = None
+                    continue
+
+            manufacture = None
+            for k, v in known_manufactures.items():
+                if (raw_category.lower().find(k.lower())>-1):
+                    manufacture = v
+
+            print(str(category)+'|'+raw_price+'|'+std_price+'|'+str(default_size)+'|'+str(fat_content)+'|'+str(manufacture))
             print(line)
-            if (i>10):
+            if (i>1):
                 break
             else:
                 i+=1
