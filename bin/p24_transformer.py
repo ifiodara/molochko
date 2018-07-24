@@ -96,41 +96,40 @@ for input_file in input_files:
             else:
                 category = None
             description = line[0].strip()
+
             raw_price = line[1].strip()
-            # TO DO if empty then calculate
-            std_price = line[2].strip()
-            # if (std_price is None) or (std_price.strip() == ''):
-            #     print("\n\n\nWATTT\n\n\n")
+            if (raw_price is not None) and (raw_price != ''):
+                raw_price = float(raw_price)
+            else: 
+                raw_price = -1.0
 
             separated_description = raw_category.split(' ')
 
             default_size = None
-            i=0
             for part in separated_description:
-                print(str(i)+part)
-                i+=1
-                if (re.match(part,(r"\d+кг|\d+л")) is not None):
-                    default_size = re.sub(r"\D",'',part)
-                    print('1')
+                if (re.match((r"\d+кг|\d+л"),part) is not None):
+                    default_size = float(re.sub(r"\D",'',part))
                     break
-                elif (re.match(part,((r"\d+г|\d+мл"))) is not None):
+                elif (re.match((r"\d+г|\d+мл"),part) is not None):
                     default_size = float(re.sub(r"\D",'',part))/1000
                     break
-                elif (re.match(part,((r"\d+мг"))) is not None):
+                elif (re.match((r"\d+мг"),part) is not None):
                     default_size = float(re.sub(r"\D",'',part))/1000000
                     break
                 else:
-                    default_size = None
+                    default_size = -1.0
                 
 
             fat_content = None
             for part in separated_description:
-                if (part.find('%')>-1):
-                    if part[:-1].find('-'):
-                        part_splitted = list(map(int,part[:-1].split('-')))
+                pos = part.rfind('%')
+                if (pos >-1):
+                    if part[:pos].find('-'):
+                        temp_part_splitted = re.sub(r",",".",re.sub(r"%","",part[:pos])).split('-')
+                        part_splitted = list(map(float,temp_part_splitted))
                         fat_content = mean(part_splitted)
                     else: 
-                        fat_content = part[:-1]
+                        fat_content = part[:pos]
                     break
                 else:
                     fat_content = None
@@ -141,12 +140,18 @@ for input_file in input_files:
                 if (raw_category.lower().find(k.lower())>-1):
                     manufacture = v
 
-            print(str(category)+'|'+raw_price+'|'+std_price+'|'+str(default_size)+'|'+str(fat_content)+'|'+str(manufacture))
+            std_price = line[2].strip()
+            if (std_price is None) or (std_price.strip() == ''):
+                if (raw_price is not None) and (raw_price > -1.0) and (default_size is not None) and (default_size > -1.0):
+                    std_price = float(raw_price/default_size)
+                else:
+                    std_price = None
+
+            print(str(category)+'|'+str(raw_price)+'|'+str(std_price)+'|'+str(default_size)+'|'+str(fat_content)+'|'+str(manufacture))
             print(line)
-            if (i>1):
-                break
-            else:
-                i+=1
+            
     
 
-
+logging.info('Script {0} started'.format(os.path.basename(__file__)))
+end_time = datetime.now()
+logging.info('Script {0} finished successfully in {1}'.format(script_name, end_time-start_time))
