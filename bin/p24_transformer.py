@@ -7,8 +7,10 @@ from datetime import datetime
 import os
 import csv
 import glob
-from statistics import mean
 import re
+import common.fields_conversion as cfc
+import common.db as cdb
+from statistics import mean
 
 ################## PARAMETERS AND VARIABLES SECTION ###########################
 #config_file = '/home/ilya/dev/projects/molochko/src/p24_transformer.cfg'
@@ -27,53 +29,31 @@ schema = config['dbconf']['schema']
 manufactures_table =config['dbconf']['manufactures_table']
 supply_schema = config['dbconf']['supply_schema']
 extract_category = 'молоко'
+result_column_list = config['dbconf']['result_column_list']
 connect_str = "dbname='{0}' user='{1}' host='{2}' password='{3}'".format(dbname,user,host,password)
 re.UNICODE
 logging.basicConfig(filename=log_file,format='%(asctime)s : %(levelname)s\t: %(message)s',level=logging.DEBUG)
 start_time = datetime.now()
 ###############################################################################
 
-def connect_to_db(connection_string):
-    try:
-        conn = psycopg2.connect(connection_string)
-        logging.info("Connected to DB")
-        return conn
-    except Exception as e:
-        logging.error("Can't connect to DB")
-        logging.error(e)
+# TO DO
+# 1. rename input file on success               5
+# 2. cleanup code                               3
+# 3. create table for product abbreviations     2
+# 4. insert processed data to db                1
+# 5. create data ouput objec/class              4
+# 6. put config for db to separate file         6
 
-def insert_data(connection_var):
-    try:
-        conn = connection_var
-        cursor = conn.cursor()
-        cursor.execute(sql.SQL(""" select count(*) from {0}.{1} """).format(sql.Identifier(schema), sql.Identifier(table)))
-        rows = cursor.fetchall()
-        print(len(rows))
-        logging.info("Inserted {0} rows".format(len(rows)))
-    except Exception as e:
-        logging.error("Can't insert data to DB")
-        logging.error(e)
+final_result = []
 
-def get_known_manufactures(connection_var):
-    try:
-        conn = connection_var
-        cursor = conn.cursor()
-        cursor.execute(sql.SQL(""" select distinct name_part, manufacture from {0}.{1} where extract_category = {2}""")
-            .format(sql.Identifier(supply_schema), sql.Identifier(manufactures_table),sql.Literal(extract_category)))
-        rows = cursor.fetchall()
-        logging.info("Got {0} manufactures".format(len(rows)))
-        return rows
-    except Exception as e:
-        logging.error("Can't get manufactures list from DB")
-        logging.error(e)
-        return None
+conne = cdb.connect_to_db(connect_str)
 
-conne = connect_to_db(connect_str)
-known_manufactures_list = get_known_manufactures(conne)
+
+known_manufactures_list = cdb.get_known_manufactures(conne, supply_schema, manufactures_table, extract_category)
 known_manufactures = {}
 known_manufactures = dict([i[0],i[1]] for i in known_manufactures_list)
 
-#insert_data(conne)
+
 output_data = []
 input_files = glob.glob("{0}p24*.csv".format(input_file_path))
 for input_file in input_files:
@@ -105,22 +85,10 @@ for input_file in input_files:
 
             separated_description = raw_category.split(' ')
 
-            default_size = None
-            for part in separated_description:
-                if (re.match((r"\d+кг|\d+л"),part) is not None):
-                    default_size = float(re.sub(r"\D",'',part))
-                    break
-                elif (re.match((r"\d+г|\d+мл"),part) is not None):
-                    default_size = float(re.sub(r"\D",'',part))/1000
-                    break
-                elif (re.match((r"\d+мг"),part) is not None):
-                    default_size = float(re.sub(r"\D",'',part))/1000000
-                    break
-                else:
-                    default_size = -1.0
+            default_size = cfc.extract_size(separated_description)
                 
 
-            fat_content = None
+            #fat_content = cfc.extract_fat_content(separated_description)
             for part in separated_description:
                 pos = part.rfind('%')
                 if (pos >-1):
@@ -129,10 +97,10 @@ for input_file in input_files:
                         part_splitted = list(map(float,temp_part_splitted))
                         fat_content = mean(part_splitted)
                     else: 
-                        fat_content = part[:pos]
+                        fat_content = float(part[:pos])
                     break
                 else:
-                    fat_content = None
+                    fat_content = -1.0
                     continue
 
             manufacture = None
@@ -145,12 +113,23 @@ for input_file in input_files:
                 if (raw_price is not None) and (raw_price > -1.0) and (default_size is not None) and (default_size > -1.0):
                     std_price = float(raw_price/default_size)
                 else:
-                    std_price = None
+                    std_price = -1.0
+            else:
+                std_price = float(std_price)
 
-            print(str(category)+'|'+str(raw_price)+'|'+str(std_price)+'|'+str(default_size)+'|'+str(fat_content)+'|'+str(manufacture))
-            print(line)
+            description = description
+            category = category
+            raw_price = round(raw_price,2)
+            std_price = round(std_price,2)
+            default_size = round(default_size,2)
+            fat_content = round(fat_content,2)
+            manufacture = manufacture
             
-    
+            final_result.append((category,description,raw_price,std_price,default_size,fat_content, manufacture))
+
+# print(final_result)
+cdb.batch_insert_data(conne,final_result,schema,table,result_column_list)
+             
 
 logging.info('Script {0} started'.format(os.path.basename(__file__)))
 end_time = datetime.now()
