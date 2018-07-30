@@ -31,13 +31,17 @@ def batch_insert_data(conn, result, schema, table, column_list):
     try:
         cursor = conn.cursor()
         columns = column_list.split(', ')
+        result_length = len(result)
 
         target = sql.SQL('.').join([sql.Identifier(schema),sql.Identifier(table)])
         sql_columns = sql.SQL(', ').join(map(sql.Identifier, columns))
 
         psycopg2.extras.execute_values(cursor,sql.SQL(" insert into {0} ({1}) values %s").format(
-            target, sql_columns).as_string(conn), result)
-        logging.info("Inserted data to {0}.{1}".format(schema, table))
+            target, sql_columns).as_string(conn), result,page_size=result_length)
+
+        rows_inserted = cursor.rowcount
+        logging.info("Inserted {0} rows of data to {1}.{2}".format(rows_inserted,schema, table))
     except Exception as e:
         logging.error("Can't insert data to DB")
         logging.error(e)
+    assert rows_inserted == len(result), logging.error("ASSERTION_ERROR: Got {0} rows but inserted {1} rows".format(result_length, rows_inserted))
